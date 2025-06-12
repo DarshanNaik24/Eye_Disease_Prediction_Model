@@ -9,9 +9,7 @@ import tempfile
 def model_prediction(test_image_path):
     model = tf.keras.models.load_model(
         "Trained_Model.h5",
-        compile=False,
-        custom_objects={},
-        backend='h5py'  # Explicit backend
+        compile=False  # Explicit backend
     )
     img = tf.keras.utils.load_img(test_image_path, target_size=(224, 224))
     x = tf.keras.utils.img_to_array(img)

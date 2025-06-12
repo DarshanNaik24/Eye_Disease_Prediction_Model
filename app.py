@@ -5,38 +5,9 @@ import numpy as np
 from recommendation import cnv,dme,drusen,normal
 import tempfile
 
-def add_bg_from_url():
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url("https://img.freepik.com/premium-psd/abstract-medical-background-with-doctor_1117456-5315.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            backdrop-filter: blur(8px);
-            background-attachment: fixed;
-        }}
-        .stApp::before {{
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.6); /* Adjust transparency */
-            z-index: -1;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-add_bg_from_url()
-
 #Tensorflow Model Prediction
 def model_prediction(test_image_path):
-    model = tf.keras.models.load_model("Trained_Model.h5", compile=False)
+    model = tf.keras.models.load_model("Trained_Model.h5", compile=False, custom_objects={})
     img = tf.keras.utils.load_img(test_image_path, target_size=(224, 224))
     x = tf.keras.utils.img_to_array(img)
     x = np.expand_dims(x, axis=0)
